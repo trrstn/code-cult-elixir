@@ -3,7 +3,13 @@ defmodule RateCardTest do
   doctest RateCard
 
   describe "Rate card pricing" do
+    test "vehicle unknown returns error distance" do
+      assert RateCard.get_pricing_for("duque", "string") == {:error, :invalid_distance}
+      assert RateCard.get_pricing_for("roque", 1) == {:error, :invalid_distance}
+    end
+
     test "vehicle car returns correct price" do
+      assert RateCard.get_pricing_for("bike", "string") == {:error, :invalid_distance}
       assert RateCard.get_pricing_for("bike", -0.1) == {:error, :invalid_distance}
       assert RateCard.get_pricing_for("bike", 0.1) == {:ok, 15}
       assert RateCard.get_pricing_for("bike", 5.1) == {:ok, 17}
@@ -14,6 +20,7 @@ defmodule RateCardTest do
     end
 
     test "vehicle bike returns correct price" do
+      assert RateCard.get_pricing_for("car", "string") == {:error, :invalid_distance}
       assert RateCard.get_pricing_for("car", -0.1) == {:error, :invalid_distance}
       assert RateCard.get_pricing_for("car", 0.1) == {:ok, 20}
       assert RateCard.get_pricing_for("car", 5.1) == {:ok, 25}
