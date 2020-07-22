@@ -1,21 +1,15 @@
 # RateCard
 
-**TODO: Add description**
+Slerp is an ordering platform for merchants that wants their products delivered. We have this thing called rate cards that we use to determine the delivery fee depending on distance and vehicle used.
 
-## Installation
+Update the function get_pricing_for/2 in RateCard module so that it returns an {:ok, price} tuple with the correct price that matches the price matrix below.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `rate_card` to your list of dependencies in `mix.exs`:
+Ex: `RateCard.get_pricing_for("bike", 6)` -> `{:ok, 25}`
+Notes: negative distances should return an `{:error, :invalid_distance}` tuple
 
-```elixir
-def deps do
-  [
-    {:rate_card, "~> 0.1.0"}
-  ]
-end
-```
+### Price Matrix
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/rate_card](https://hexdocs.pm/rate_card).
-
+ "" | < 5 | < 10 | < 15 | < 20 | distance >=20
+-- | --- |  --- |  --- |  --- |  ----------- 
+bike | 15 | 17 | 22 | 27 | 30
+car | 20 | 25 | 30 | 35 | 40
